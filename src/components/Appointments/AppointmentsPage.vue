@@ -1,11 +1,11 @@
 <template>
     <div class="flex flex-col justify-center bg-white items-center pl-8 pr-8">
         <div class="flex flex-row-reverse w-full">
-            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            <button @click="toggleNewAppointmentModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                 <span>Add New Appointment</span>
             </button>
         </div>
-        <div class="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="relative w-full overflow-x-auto sm:rounded-lg mt-4">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                     Your Appointments
@@ -14,19 +14,19 @@
                     </p> -->
                     <SearchButton class="mt-4"/>
                 </caption>
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead class="text-xs text-gray-400 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b rounded-t-lg">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Patient Name
+                            PATIENT NAME
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Schedule
+                            SCHEDULE
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Status
+                            STATUS
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Price
+                            NOTES
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
@@ -36,18 +36,18 @@
                 <tbody>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Apple MacBook Pro 17"
+                            John Doe
                         </th>
                         <td class="px-6 py-4">
-                            Silver
+                            March  04, 2024 - 11:00 AM
                         </td>
                         <td class="px-6 py-4">
-                            Laptop
+                            Success
                         </td>
                         <td class="px-6 py-4">
-                            $2999
+                            Tester Transaction
                         </td>
-                        <td class="px-6 py-4 text-right">
+                        <td class="py-4 text-right flex justify-around">
                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                         </td>
@@ -80,16 +80,32 @@
                 </ul>
             </nav>
         </div>
+        <NewAppointmentModal :onInitialize="setNewAppointmentModal" />
    </div>
 </template>
 
 <script>
 import SearchButton from '@/components/Appointments/sub_components/SearchButton.vue'
+import NewAppointmentModal from '@/components/sub_components/NewAppointmentModal.vue'
 
 export default {
     name: 'AccountsPage',
+    data() {
+        return {
+            new_appointment_modal: null
+        }
+    },
     components: {
-        SearchButton
+        SearchButton,
+        NewAppointmentModal
+    },
+    methods: {
+        setNewAppointmentModal(modal){
+            this.new_appointment_modal = modal
+        },
+        toggleNewAppointmentModal(){
+            this.new_appointment_modal.toggle();
+        }
     },
     computed: {
         pageTitle(){
