@@ -1,0 +1,25 @@
+.form-input {
+    padding: 8px 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    border-radius: 10px;
+}
+
+.form-input:focus {
+    border: 1px solid #555;
+}
+
+.form-button {
+    background-color: #1D24CA;
+    color: white;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+}
+
+.form-button:hover {
+    background-color: #343ac5;
+}

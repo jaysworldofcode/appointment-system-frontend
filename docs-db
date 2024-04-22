@@ -1,0 +1,22 @@
+users
+[{
+	"id",
+	"username",
+	"password",
+	"display_name",
+	"date_created",
+	"date_updated"
+}]
+
+data
+[{
+	"id",
+	"owner",
+	"title",
+	"h_slt",
+	"type", //file, image, video, account, password
+	"h_password",
+	"caption",
+	"password_hint",
+	"file_contents" //array
+}]
