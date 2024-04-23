@@ -1,20 +1,19 @@
 <template>
     <div class="flex w-full">
         <!-- Main modal -->
-        <div :id="'new-appointment-modal-'+uuid" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div :id="'view-appointment-modal-'+uuid" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-2xl max-h-full">
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <!-- Modal header -->
                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                        <h3 class="flex uppercase justify-center items-center text-xl font-semibold text-gray-900 dark:text-white">
+                        <h3 class="flex justify-center items-center text-xl font-semibold text-gray-900 dark:text-white">
                             <svg class="mr-4 " width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M17 4.25H15.75V3C15.75 2.80109 15.671 2.61032 15.5303 2.46967C15.3897 2.32902 15.1989 2.25 15 2.25C14.8011 2.25 14.6103 2.32902 14.4697 2.46967C14.329 2.61032 14.25 2.80109 14.25 3V4.25H9.75V3C9.75 2.80109 9.67098 2.61032 9.53033 2.46967C9.38968 2.32902 9.19891 2.25 9 2.25C8.80109 2.25 8.61032 2.32902 8.46967 2.46967C8.32902 2.61032 8.25 2.80109 8.25 3V4.25H7C6.27065 4.25 5.57118 4.53973 5.05546 5.05546C4.53973 5.57118 4.25 6.27065 4.25 7V18C4.25 18.7293 4.53973 19.4288 5.05546 19.9445C5.57118 20.4603 6.27065 20.75 7 20.75H17C17.7293 20.75 18.4288 20.4603 18.9445 19.9445C19.4603 19.4288 19.75 18.7293 19.75 18V7C19.75 6.27065 19.4603 5.57118 18.9445 5.05546C18.4288 4.53973 17.7293 4.25 17 4.25ZM7 5.75H8.25V7C8.25 7.19891 8.32902 7.38968 8.46967 7.53033C8.61032 7.67098 8.80109 7.75 9 7.75C9.19891 7.75 9.38968 7.67098 9.53033 7.53033C9.67098 7.38968 9.75 7.19891 9.75 7V5.75H14.25V7C14.25 7.19891 14.329 7.38968 14.4697 7.53033C14.6103 7.67098 14.8011 7.75 15 7.75C15.1989 7.75 15.3897 7.67098 15.5303 7.53033C15.671 7.38968 15.75 7.19891 15.75 7V5.75H17C17.3315 5.75 17.6495 5.8817 17.8839 6.11612C18.1183 6.35054 18.25 6.66848 18.25 7V9.75H5.75V7C5.75 6.66848 5.8817 6.35054 6.11612 6.11612C6.35054 5.8817 6.66848 5.75 7 5.75ZM17 19.25H7C6.66848 19.25 6.35054 19.1183 6.11612 18.8839C5.8817 18.6495 5.75 18.3315 5.75 18V11.25H18.25V18C18.25 18.3315 18.1183 18.6495 17.8839 18.8839C17.6495 19.1183 17.3315 19.25 17 19.25Z" fill="#000000"/>
                             </svg>
-                            New Appointment
+                            View Appointment
                         </h3>
-                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" :data-modal-hide="'new-appointment-modal-'+uuid">
+                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" :data-modal-hide="'view-appointment-modal-'+uuid">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                             </svg>
@@ -25,7 +24,7 @@
                     <div class="p-4 md:p-5 space-y-4">
                         <div class="grid gap-6 mb-6 md:grid-cols-2">
                             <div>
-                                <label class="uppercase block mb-2 text-sm font-medium text-gray-900 dark:text-white">Schedule date start</label>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Schedule date start</label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -36,7 +35,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label class="uppercase block mb-2 text-sm font-medium text-gray-900 dark:text-white">Schedule date end</label>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Schedule date end</label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
                                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
@@ -49,7 +48,7 @@
                         </div>
                         <div class="grid gap-6 mb-6 md:grid-cols-2">
                             <div>
-                                <label for="appointment-status" class="uppercase block mb-2 text-sm font-medium text-gray-900 dark:text-white">Appointment Status</label>
+                                <label for="appointment-status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Appointment Status</label>
                                 <select id="appointment-status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option selected>Choose a status</option>
                                     <option value="1">Successful</option>
@@ -59,12 +58,12 @@
                                 </select>
                             </div>  
                             <div>
-                                <label for="notes" class="uppercase block mb-2 text-sm font-medium text-gray-900 dark:text-white">Note</label>
+                                <label for="notes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Note</label>
                                 <textarea id="notes" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
                             </div>
                         </div>
                         <div class="relative overflow-x-auto">
-                            <label class="uppercase block mb-2 text-sm font-medium text-gray-900 dark:text-white">Patient</label>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Patient</label>
                             <div class="p-2 pb-4 bg-white dark:bg-gray-900">
                                 <label for="table-search" class="sr-only">Search Patient by Name</label>
                                 <div class="relative mt-1">
@@ -99,10 +98,10 @@
                                             John Doe
                                         </th>
                                         <td class="px-6 py-4">
-                                            +63999999999
+                                            Phone Number
                                         </td>
                                         <td class="px-6 py-4">
-                                            Dumaguete City, Junob
+                                            Address
                                         </td>
                                         <td class="px-6 py-4">
                                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Select</a>
@@ -115,16 +114,16 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button :data-modal-hide="'new-appointment-modal-'+uuid" type="button" class="uppercase  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <button :data-modal-hide="'view-appointment-modal-'+uuid" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Save
                         </button>
-                        <button :data-modal-hide="'new-appointment-modal-'+uuid" type="button" class="uppercase py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                        <button :data-modal-hide="'view-appointment-modal-'+uuid" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                             Cancel
                         </button>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 </template>
 <script>
@@ -132,7 +131,7 @@ import { Modal } from 'flowbite';
 import { v4 as uuidv4 } from 'uuid';
 
 export default {
-    name: 'NewAppointmentModal',
+    name: 'ViewAppointmentDetailsModal',
     props: [
         'onInitialize'
     ],
@@ -147,7 +146,7 @@ export default {
             this.modal.toggle();
         },
         initializeModal(){
-            const $targetModal = document.getElementById('new-appointment-modal-'+this.uuid);
+            const $targetModal = document.getElementById('view-appointment-modal-'+this.uuid);
 
             // options with default values
             const options = {
@@ -169,7 +168,7 @@ export default {
 
             // instance options object
             const instanceOptions = {
-                id: 'new-appointment-modal-'+this.uuid,
+                id: 'view-appointment-modal-'+this.uuid,
                 override: true
             };
 
