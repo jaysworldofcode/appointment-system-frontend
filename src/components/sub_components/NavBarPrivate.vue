@@ -88,6 +88,7 @@
 </template>
 <script>
 import { Drawer } from 'flowbite';
+import local_config from '@/constants/local_config.js'
 
 export default {
   name: 'NavBarPrivate',
@@ -99,7 +100,10 @@ export default {
     }
   },
   methods: {
-    logout(){
+    async logout(){
+      localStorage.removeItem(
+        local_config.authorization_key
+      )
       this.$router.push('/login')
     },
     toggleDrawer(){
