@@ -7,7 +7,9 @@ import menus from '@/constants/menus.js'
 import '@/assets/css/tailwind.css'
 import '@/assets/css/style.css'
 import 'flowbite/dist/flowbite.js'
+import Vuelidate from 'vuelidate'
 
+Vue.use(Vuelidate)
 Vue.use(Vuex)
 Vue.use(require('vue-moment'))
 Vue.use(VueRouter)

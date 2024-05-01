@@ -1,9 +1,10 @@
 import LoginPage from '@/components/Login/LoginPage.vue'
-import ProfilePage from '@/components/Profile/ProfilePage.vue';
+import ProfilePage from '@/components/Profile/ProfilePage.vue'
 import PrivateSpacePage from '@/components/PrivateSpace/PrivateSpacePage.vue'
 import AccountsPage from '@/components/Accounts/AccountsPage.vue'
 import RegistrationPage from '@/components/Registration/RegistrationPage.vue'
-import AppointmentsPage from '@/components/Appointments/AppointmentsPage.vue';
+import AppointmentsPage from '@/components/Appointments/AppointmentsPage.vue'
+import AppointmentDetailsPage from '@/components/AppointmentDetails/AppointmentDetailsPage.vue'
 
 export default [
     {
@@ -23,6 +24,15 @@ export default [
             requiresAuth: true
         },
         component: AppointmentsPage
+    },
+    {
+        name: 'Appointment',
+        icon: 'registration',
+        path: '/my-appointments/details',
+        meta: {
+            requiresAuth: true
+        },
+        component: AppointmentDetailsPage
     },
     // {
     //     name: 'Registration Page',

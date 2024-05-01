@@ -24,7 +24,7 @@
                     <div class="p-4 md:p-5 space-y-4">
                         <div class="grid gap-6 mb-6 md:grid-cols-2">
                             <div>
-                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Schedule date start</label>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Schedule date</label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Schedule date end</label>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Schedule time</label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
                                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
@@ -72,7 +72,7 @@
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                         </svg>
                                     </div>
-                                    <input type="text" id="table-search" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Patient by Name">
+                                    <input type="text" v-model="search_patient_name" @input="searchPatientName($event)" id="table-search" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Patient by Name">
                                 </div>
                             </div>
                             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -93,28 +93,44 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <tr v-if="field.selected_patient" class="bg-green-200 border-b dark:bg-gray-900 dark:border-gray-700 hover:bg-green-100 dark:hover:bg-gray-600">
                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            John Doe
+                                            {{ field.selected_patient.firstname+' '+field.selected_patient.lastname }}
                                         </th>
                                         <td class="px-6 py-4">
-                                            Phone Number
+                                            {{ field.selected_patient.phone_number }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            Address
+                                            {{ field.selected_patient.address }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Select</a>
+                                            <button @click="unselectePatient" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Unselect</button>
                                         </td>
                                     </tr>
-
+                                    <tr v-for="patient in filterUnselectedPatient" :key="patient.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ patient.firstname+' '+patient.lastname }}
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            {{ patient.phone_number }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ patient.address }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <button @click="selectPatient(patient)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Select</button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
-                        </div>                    
+                        </div>
+                        <button type="button" @click="viewAppointmentDetails(1)" class="w-full mb-4 mt-4 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
+                            View Full details
+                        </button>
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button :data-modal-hide="'view-appointment-modal-'+uuid" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <button @click="save" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Save
                         </button>
                         <button :data-modal-hide="'view-appointment-modal-'+uuid" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
@@ -129,6 +145,10 @@
 <script>
 import { Modal } from 'flowbite';
 import { v4 as uuidv4 } from 'uuid';
+import { searchPatients } from '@/repository/PatientsRepository';
+import { mapGetters, mapMutations } from "vuex";
+import system_settings_types from '@/modules/store/system_settings/types'
+import { required, minLength, between } from 'vuelidate/lib/validators'
 
 export default {
     name: 'ViewAppointmentDetailsModal',
@@ -138,12 +158,79 @@ export default {
     data() {
         return {
             modal: null,
-            uuid: null
+            uuid: null,
+            search_patient_name: null,
+            search_patients: [],
+            field: {
+                schedule_date_start: null,
+                schedule_time: null,
+                appointment_status: null,
+                notes: null,
+                selected_patient: null,
+            }
         }
     },
+    validations: {
+        field: {
+            schedule_date_start: {
+                required
+            },
+            schedule_time: {
+                required
+            },
+            appointment_status: {
+                required
+            },
+            notes: {
+                required
+            },
+            selected_patient: {
+                required
+            },
+        },
+    },
+    computed: {
+        ...mapGetters({
+            getUserDetails: system_settings_types.GET_USER_DETAILS
+        }),
+        filterUnselectedPatient: function () {
+            return this.search_patients.filter((i)=> {
+                if(this.field.selected_patient == null){
+                    return true
+                }
+
+                return i.id != this.field.selected_patient.id
+            })
+        },
+    },
     methods: {
+        viewAppointmentDetails(id){
+            this.$router.push({ path: '/my-appointments/details', query: { id: id }})
+            this.modal.toggle();
+        },
+        unselectePatient(){
+            this.field.selected_patient = null
+        },
+        selectPatient(patient){
+            console.log(patient)
+            this.field.selected_patient = patient
+        },
         toggleDrawer(){
             this.modal.toggle();
+        },
+        async searchPatientName(){
+            const data = await searchPatients({
+                    firstname: this.search_patient_name
+                },
+                this.getUserDetails.token
+            )
+
+            console.log(data)
+            this.search_patients = data
+        },
+        save(){
+            this.$v.$touch()
+            console.log($v)
         },
         initializeModal(){
             const $targetModal = document.getElementById('view-appointment-modal-'+this.uuid);
